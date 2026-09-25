@@ -1,0 +1,4 @@
+# Minimal backend and Experiment 1 test dependencies (Python 3.9+).
+fastapi==0.118.2
+pydantic==2.11.1
+pytest==8.3.5

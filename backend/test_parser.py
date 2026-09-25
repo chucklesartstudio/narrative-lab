@@ -1,12 +1,9 @@
-from pathlib import Path
-
-from app.parsers.screenplay import classify_lines
+from backend.app.parsers.screenplay import classify_lines
 
 
-screenplay_path = Path("../data/works/test-screenplay.txt")
-text = screenplay_path.read_text(encoding="utf-8")
+def test_legacy_classify_lines_interface_returns_source_aligned_blocks():
+    blocks = classify_lines("INT. ROOM - DAY\nA door opens.\n")
 
-blocks = classify_lines(text)
-
-for block in blocks:
-    print(f"{block.type:15} | {block.text}")
+    assert [block.type for block in blocks] == ["scene_heading", "action"]
+    assert [block.text for block in blocks] == ["INT. ROOM - DAY", "A door opens."]
+    assert all(block.block_id for block in blocks)

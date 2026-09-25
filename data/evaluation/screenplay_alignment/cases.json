@@ -1,0 +1,96 @@
+{
+  "dataset_id": "experiment-1-synthetic-alignment-v1",
+  "description": "Synthetic, human-verified screenplay-format fixtures; no copyrighted screenplay material.",
+  "cases": [
+    {
+      "case_id": "standard",
+      "fixture": "fixtures/standard.txt",
+      "expected_block_types": ["transition", "blank", "scene_heading", "blank", "character", "dialogue", "blank", "character", "dialogue", "transition", "blank", "scene_heading", "action"],
+      "confirmed_heading_lines": [3, 12],
+      "candidate_boundaries": [],
+      "scene_count": 2,
+      "has_pre_scene_material": true,
+      "expected_diagnostics": ["pre_scene_text"],
+      "relevant_source_spans": [{"line": 3, "text": "INT. KITCHEN - NIGHT"}, {"line": 12, "text": "EXT. STREET - NIGHT"}]
+    },
+    {
+      "case_id": "odd_indentation",
+      "fixture": "fixtures/odd_indentation.txt",
+      "expected_block_types": ["scene_heading", "action", "character", "dialogue", "blank", "action", "action"],
+      "confirmed_heading_lines": [1],
+      "candidate_boundaries": [],
+      "scene_count": 1,
+      "has_pre_scene_material": false,
+      "expected_diagnostics": ["ambiguous_character_cue"],
+      "relevant_source_spans": [{"line": 1, "text": "        INT. LIBRARY - DAY"}, {"line": 3, "text": "   MAYA (V.O.)"}]
+    },
+    {
+      "case_id": "missing_heading",
+      "fixture": "fixtures/missing_heading.txt",
+      "expected_block_types": ["character", "dialogue", "blank", "action"],
+      "confirmed_heading_lines": [],
+      "candidate_boundaries": [],
+      "scene_count": 0,
+      "has_pre_scene_material": true,
+      "expected_diagnostics": ["missing_scene_heading", "pre_scene_text"],
+      "relevant_source_spans": [{"line": 1, "text": "MAYA"}, {"line": 4, "text": "The door opens."}]
+    },
+    {
+      "case_id": "malformed_heading",
+      "fixture": "fixtures/malformed_heading.txt",
+      "expected_block_types": ["scene_heading", "action"],
+      "confirmed_heading_lines": [],
+      "candidate_boundaries": [{"line": 1, "status": "candidate_boundary"}],
+      "scene_count": 0,
+      "has_pre_scene_material": true,
+      "expected_diagnostics": ["suspicious_scene_heading", "missing_scene_heading", "pre_scene_text"],
+      "relevant_source_spans": [{"line": 1, "text": "INT KITCHEN - NIGHT"}]
+    },
+    {
+      "case_id": "multiple_dialogue",
+      "fixture": "fixtures/multiple_dialogue.txt",
+      "expected_block_types": ["scene_heading", "character", "dialogue", "dialogue", "parenthetical", "dialogue", "transition", "scene_heading", "action"],
+      "confirmed_heading_lines": [1, 8],
+      "candidate_boundaries": [],
+      "scene_count": 2,
+      "has_pre_scene_material": false,
+      "expected_diagnostics": [],
+      "relevant_source_spans": [{"line": 2, "text": "ELI"}, {"line": 5, "text": "(quietly)"}, {"line": 8, "text": "EXT. GARDEN - NIGHT"}]
+    },
+    {
+      "case_id": "voice_cues",
+      "fixture": "fixtures/voice_cues.txt",
+      "expected_block_types": ["scene_heading", "character", "dialogue", "character", "dialogue", "character", "dialogue"],
+      "confirmed_heading_lines": [1],
+      "candidate_boundaries": [],
+      "scene_count": 1,
+      "has_pre_scene_material": false,
+      "expected_diagnostics": [],
+      "normalized_cues": {"2": "ANNA", "4": "MARK", "6": "JO"},
+      "relevant_source_spans": [{"line": 2, "text": "ANNA (V.O.)"}, {"line": 4, "text": "MARK (O.S.)"}, {"line": 6, "text": "JO (O.C.)"}]
+    },
+    {
+      "case_id": "pre_scene_text",
+      "fixture": "fixtures/pre_scene_text.txt",
+      "expected_block_types": ["action", "blank", "scene_heading", "action"],
+      "confirmed_heading_lines": [3],
+      "candidate_boundaries": [],
+      "scene_count": 1,
+      "has_pre_scene_material": true,
+      "expected_diagnostics": ["pre_scene_text"],
+      "relevant_source_spans": [{"line": 1, "text": "A title card appears: Four years earlier."}, {"line": 3, "text": "EXT. FARM ROAD - DAWN"}]
+    },
+    {
+      "case_id": "mixed_line_endings",
+      "fixture": "fixtures/mixed_line_endings.txt",
+      "expected_block_types": ["scene_heading", "character", "dialogue", "blank", "transition", "scene_heading", "action"],
+      "confirmed_heading_lines": [1, 6],
+      "candidate_boundaries": [],
+      "scene_count": 2,
+      "has_pre_scene_material": false,
+      "newline_style": "mixed",
+      "expected_diagnostics": [],
+      "relevant_source_spans": [{"line": 1, "text": "INT. ROOM - NIGHT"}, {"line": 6, "text": "EXT. ROAD - DAWN"}]
+    }
+  ]
+}
